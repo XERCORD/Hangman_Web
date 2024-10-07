@@ -1,0 +1,20 @@
+{{define "condition"}}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soirée chez SKIBIDIMITRI</title>
+</head>
+<body>
+    {{if .Check}}
+        <p>La condition du champ 'Check' est vraie</p>
+    {{end}}
+
+    {{if .CheckOwner}}
+        <p>Le propriétaire est vérifié</p>
+    {{else}}
+        <p>Oupsss le propriétaire n'est pas vérifié ...</p>
+</body>
+</html>
+{{end}}
