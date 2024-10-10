@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.5s;
+}
+
+.even {
+    background-color: #e0f7fa; /* Couleur de fond pour les vues paires */
+}
+
+.odd {
+    background-color: #ffebee; /* Couleur de fond pour les vues impaires */
+}
+
+h1 {
+    color: #333;
+    font-size: 2rem;
+    text-align: center;
+}

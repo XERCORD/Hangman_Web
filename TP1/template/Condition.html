@@ -1,0 +1,20 @@
+{{define "Condition"}}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compteur de Vues</title>
+    <link rel="stylesheet" href="/static/style/style_condition.css">
+</head>
+<body class="{{if .IsEven}}even{{else}}odd{{end}}">
+    <h1>
+        {{if .IsEven}}
+            Le nombre de vues est pair : {{.Count}}
+        {{else}}
+            Le nombre de vues est impair : {{.Count}}
+        {{end}}
+    </h1>
+</body>
+</html>
+{{end}}

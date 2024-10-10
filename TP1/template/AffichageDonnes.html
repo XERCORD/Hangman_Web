@@ -1,0 +1,47 @@
+{{define "AffichageDonnes"}}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="stylesheet" href="/static/style/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informations de la Classe</title>
+</head>
+<body>
+    <a id="top"></a>
+    <h1>Informations de la classe</h1>
+    <p><strong>Nom de la classe :</strong> {{.Nom_de_Classe}}</p>
+    <p><strong>Filière :</strong> {{.Filiere}}</p>
+    <p><strong>Niveau :</strong> {{.Niveau}}</p>
+    <p><strong>Nombre d'étudiants :</strong> {{.Nbr_Etudiant}}</p>
+
+    <h2>Liste des étudiants</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Âge</th>
+                <th>Sexe</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .Etudiant}}
+            <tr>
+                <td>{{.Nom}}</td>
+                <td>{{.Prenom}}</td>
+                <td>{{.Age}}</td>
+                <td>
+                    {{if eq .Sexe "M"}}
+                    <img src="/static/img/homme.png" alt="Masculin">
+                    {{else if eq .Sexe "F"}}
+                    <img src="/static/img/femme.png" alt="Féminin">
+                    {{end}}
+                </td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</body>
+</html>
+{{end}}
