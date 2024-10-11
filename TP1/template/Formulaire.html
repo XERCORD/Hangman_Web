@@ -1,0 +1,32 @@
+{{ define "form" }}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulaire utilisateur</title>
+    <link rel="stylesheet" href="/static/style/style_form.css">
+</head>
+<body>
+    <h1>Informations personnelles</h1>
+    <form method="post">
+        <label for="nom">Nom:</label>
+        <input type="text" id="nom" name="nom" pattern="[A-Za-zÀ-ÿ]{1,32}" title="Nom doit contenir uniquement des lettres, entre 1 et 32 caractères." required><br>
+
+        <label for="prenom">Prénom:</label>
+        <input type="text" id="prenom" name="prenom" pattern="[A-Za-zÀ-ÿ]{1,32}" title="Prénom doit contenir uniquement des lettres, entre 1 et 32 caractères." required><br>
+
+        <label for="dateNaissance">Date de naissance:</label>
+        <input type="date" id="dateNaissance" name="dateNaissance" required><br>
+
+        <label for="sexe">Sexe:</label>
+        <select id="sexe" name="sexe" required>
+            <option value="">Sélectionnez...</option>
+            <option value="masculin">Masculin</option>
+            <option value="féminin">Féminin</option>
+            <option value="autre">Autre</option>
+        </select><br>
+
+        <input type="submit" value="Soumettre">
+    </form>
+</body>
+</html>
+{{ end }}

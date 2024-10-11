@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 	"os"
+	"regexp"
 	"sync"
 )
 
@@ -23,6 +24,13 @@ type ListeEtudiant struct {
 	Etudiant      []Etudiant
 }
 
+type User struct {
+	Nom           string
+	Prénom        string
+	DateNaissance string
+	Sexe          string
+}
+
 var (
 	// Compteur de vues
 	viewCount int
@@ -34,20 +42,29 @@ type PageData struct {
 	IsEven bool
 }
 
+var (
+	nomRegex    = regexp.MustCompile(`^[A-Za-zÀ-ÿ]{1,32}$`)
+	prenomRegex = regexp.MustCompile(`^[A-Za-zÀ-ÿ]{1,32}$`)
+	sexeOptions = []string{"masculin", "féminin", "autre"}
+)
+
 func main() {
+	// Charger tous les templates HTML dans le dossier "template"
 	temp, err := template.ParseGlob("./template/*.html")
 	if err != nil {
 		fmt.Println(fmt.Sprintf("ERREUR => %s", err.Error()))
 		os.Exit(2)
 	}
-	// Chalenge 1
+
 	// Gérer les fichiers statiques
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("asset"))))
 
+	// Route /cours
 	http.HandleFunc("/cours", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Bonjour bienvenue sur la route /cours"))
+		w.Write([]byte("Bonjour, bienvenue sur la route /cours"))
 	})
 
+	// Route /promo
 	http.HandleFunc("/promo", func(w http.ResponseWriter, r *http.Request) {
 		classe := ListeEtudiant{
 			Nom_de_Classe: "B1 Informatique",
@@ -69,8 +86,8 @@ func main() {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 	})
-	// Chalenge 2
 
+	// Route /change avec un compteur de vues
 	http.HandleFunc("/change", func(w http.ResponseWriter, r *http.Request) {
 		mutex.Lock() // Verrouille l'accès au compteur
 		viewCount++
@@ -86,9 +103,53 @@ func main() {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 	})
-	// Ajout de la gestion d'erreur pour ListenAndServe
+
+	// Route /user/form pour le formulaire utilisateur
+	http.HandleFunc("/user/form", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodPost {
+			nom := r.FormValue("nom")
+			prenom := r.FormValue("prenom")
+			dateNaissance := r.FormValue("dateNaissance")
+			sexe := r.FormValue("sexe")
+
+			fmt.Println("Date de naissance reçue:", dateNaissance)
+
+			if !nomRegex.MatchString(nom) || !prenomRegex.MatchString(prenom) || !isValidSexe(sexe) {
+				http.Error(w, "Informations invalides", http.StatusBadRequest)
+				return
+			}
+
+			// Traitez les données ici (enregistrement, affichage, etc.)
+			http.Redirect(w, r, "/success", http.StatusSeeOther)
+			return
+		}
+
+		err := temp.ExecuteTemplate(w, "form", nil)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+	})
+
+	// Route pour afficher la page de succès
+	http.HandleFunc("/success", func(w http.ResponseWriter, r *http.Request) {
+		err := temp.ExecuteTemplate(w, "Succes", nil)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+	})
+
+	// Démarrage du serveur
 	if err := http.ListenAndServe("localhost:8000", nil); err != nil {
 		fmt.Println(fmt.Sprintf("ERREUR => %s", err.Error()))
 		os.Exit(1)
 	}
+}
+
+func isValidSexe(sexe string) bool {
+	for _, option := range sexeOptions {
+		if sexe == option {
+			return true
+		}
+	}
+	return false
 }

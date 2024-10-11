@@ -1,0 +1,78 @@
+/* Style général pour le formulaire */
+form {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Style pour les titres du formulaire */
+form h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Style pour les étiquettes des champs */
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Style pour les champs de texte */
+form input[type="text"],
+form input[type="date"],
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* Style pour le bouton de soumission */
+form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Changement de couleur au survol du bouton */
+form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Style pour les messages d'erreur */
+.error {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+/* Style pour les éléments du formulaire */
+form select {
+    appearance: none;
+    background: white;
+    cursor: pointer;
+}
+
+/* Ajustement de la taille des champs pour mobiles */
+@media (max-width: 600px) {
+    form {
+        width: 90%;
+    }
+}
