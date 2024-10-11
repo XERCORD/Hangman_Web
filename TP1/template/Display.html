@@ -1,0 +1,17 @@
+{{define "Display"}}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Informations de l'utilisateur</title>
+    <link rel="stylesheet" href="/static/style/style_display.css">
+</head>
+<body>
+    <h1>Informations soumises</h1>
+    <p><strong>Nom:</strong> {{.Nom}}</p>
+    <p><strong>Prénom:</strong> {{.Prenom}}</p>
+    <p><strong>Date de Naissance:</strong> {{.DateNaissance}}</p>
+    <p><strong>Sexe:</strong> {{.Sexe}}</p>
+    <a href="/user/form">Retour au formulaire</a>
+</body>
+</html>
+{{end}}

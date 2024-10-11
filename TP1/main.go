@@ -26,15 +26,16 @@ type ListeEtudiant struct {
 
 type User struct {
 	Nom           string
-	Prénom        string
+	Prenom        string
 	DateNaissance string
 	Sexe          string
 }
 
 var (
 	// Compteur de vues
-	viewCount int
-	mutex     sync.Mutex // Pour gérer les accès concurrents au compteur
+	viewCount   int
+	mutex       sync.Mutex // Pour gérer les accès concurrents au compteur
+	currentUser User
 )
 
 type PageData struct {
@@ -107,20 +108,7 @@ func main() {
 	// Route /user/form pour le formulaire utilisateur
 	http.HandleFunc("/user/form", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost {
-			nom := r.FormValue("nom")
-			prenom := r.FormValue("prenom")
-			dateNaissance := r.FormValue("dateNaissance")
-			sexe := r.FormValue("sexe")
-
-			fmt.Println("Date de naissance reçue:", dateNaissance)
-
-			if !nomRegex.MatchString(nom) || !prenomRegex.MatchString(prenom) || !isValidSexe(sexe) {
-				http.Error(w, "Informations invalides", http.StatusBadRequest)
-				return
-			}
-
-			// Traitez les données ici (enregistrement, affichage, etc.)
-			http.Redirect(w, r, "/success", http.StatusSeeOther)
+			http.Redirect(w, r, "/user/treatment", http.StatusSeeOther)
 			return
 		}
 
@@ -130,9 +118,51 @@ func main() {
 		}
 	})
 
-	// Route pour afficher la page de succès
-	http.HandleFunc("/success", func(w http.ResponseWriter, r *http.Request) {
-		err := temp.ExecuteTemplate(w, "Succes", nil)
+	http.HandleFunc("/user/treatment", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodPost {
+			nom := r.FormValue("nom")
+			prenom := r.FormValue("prenom")
+			dateNaissance := r.FormValue("dateNaissance")
+			sexe := r.FormValue("sexe")
+
+			// Valider les données
+			if !nomRegex.MatchString(nom) || !prenomRegex.MatchString(prenom) || !isValidSexe(sexe) {
+				http.Redirect(w, r, "/user/error", http.StatusSeeOther)
+				return
+			}
+
+			// Stocker les informations de l'utilisateur
+			mutex.Lock()
+			currentUser = User{
+				Nom:           nom,
+				Prenom:        prenom,
+				DateNaissance: dateNaissance,
+				Sexe:          sexe,
+			}
+			mutex.Unlock()
+
+			// Rediriger vers la page d'affichage si tout est valide
+			http.Redirect(w, r, "/user/display", http.StatusSeeOther)
+		} else {
+			http.Redirect(w, r, "/user/form", http.StatusSeeOther)
+		}
+	})
+
+	http.HandleFunc("/user/display", func(w http.ResponseWriter, r *http.Request) {
+		mutex.Lock()         // Verrouiller l'accès à currentUser
+		defer mutex.Unlock() // Déverrouiller à la fin de la fonction
+
+		if currentUser.Nom == "" || currentUser.Prenom == "" || currentUser.Sexe == "" || currentUser.DateNaissance == "" {
+			http.Redirect(w, r, "/user/error", http.StatusSeeOther)
+			return
+		}
+		err := temp.ExecuteTemplate(w, "Display", currentUser)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+	})
+	http.HandleFunc("/user/error", func(w http.ResponseWriter, r *http.Request) {
+		err := temp.ExecuteTemplate(w, "Error", nil)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
