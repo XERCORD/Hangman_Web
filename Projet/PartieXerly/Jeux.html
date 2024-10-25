@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/jeux.css">
+    <title>Jeux</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Hangman WEB</h1>
+        <div class="cache">
+            <h2>MOT :</h2>
+            <div class="pendu-container">
+                <div class="base"></div>
+                <div class="bar-vertical"></div>
+                <div class="bar-horizontal"></div>
+                <div class="corde"></div>
+                <div class="tete"></div>
+                <div class="corps"></div>
+                <div class="bras-gauche"></div>
+                <div class="bras-droit"></div>
+                <div class="jambe-gauche"></div>
+                <div class="jambe-droit"></div>
+            </div>
+        
+            <div class="button-container">
+                <!-- Boutons pour afficher chaque étape -->
+                <button onclick="showStep(1),showStep(2),showStep(3),showStep(4),showStep(5),showStep(6),showStep(7),showStep(8),showStep(9),showStep(10)">Étape 1 : Base</button>
+                <button onclick="showStep(2)">Étape 2 : Barre verticale</button>
+                <button onclick="showStep(3)">Étape 3 : Barre horizontale</button>
+                <button onclick="showStep(4)">Étape 4 : Corde</button>
+                <button onclick="showStep(5)">Étape 5 : Tête</button>
+                <button onclick="showStep(6)">Étape 6 : Corps</button>
+                <button onclick="showStep(7)">Étape 7 : Bras gauche</button>
+                <button onclick="showStep(8),(9),(10)">Étape 8 : Bras droit</button>
+                <button onclick="showStep(11)">Étape 9 : Jambe gauche</button>
+                <button onclick="showStep(12)">Étape 10 : Jambe droite</button>
+            </div>
+        
+            <script>
+                // Fonction pour afficher chaque étape
+                function showStep(step) {
+                    const steps = [
+                        'base',
+                        'bar-vertical',
+                        'bar-horizontal',
+                        'corde',
+                        'tete',
+                        'corps',
+                        'bras-gauche',
+                        'bras-droit',
+                        'poignet',
+                        'doit',
+                        'jambe-gauche',
+                        'jambe-droit'
+                    ];
+        
+                    // Affiche l'élément correspondant au numéro de l'étape
+                    if (step > 0 && step <= steps.length) {
+                        document.querySelector(`.${steps[step - 1]}`).style.display = 'block';
+                    }
+                }
+            </script>
+
+
+
+
+
+
+        
+        </div>
+    </div>
+</body>
+</html>

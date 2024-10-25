@@ -1,0 +1,44 @@
+{{ define "accueil" }}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/lancement.css">
+    <title>Accueil</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Hangman WEB</h1>
+        <div class="presentation">
+            <h2>Bienvenue dans le Jeu du Pendu ! 🪓</h2>
+            <p>Règles du Jeu :</p>
+            <ul>
+                <li>Devinez le mot caché en proposant des lettres.</li>
+                <li>Vous avez 9 essais. Attention à ne pas faire trop d'erreurs !</li>
+                <li>À chaque mauvaise réponse, une partie du pendu est dessinée et enlève 1 essaie</li>
+                <li>Si vous proposez 1 mot et que c'est faux ça vous enlève 2 essaies</li>
+                <li>Le jeu se termine si vous devinez le mot ou si le pendu est complet.</li>
+                
+            </ul>
+            <p>A vous de jouer, Bonne chance !</p>
+        </div>
+
+        <div class="form-section"> 
+            <h3>Veuillez entrer votre pseudo pour commencer :</h3>
+            <form action="/start" method="POST">
+                <label for="pseudo">Pseudo :</label>
+                <input type="text" id="pseudo" name="pseudo" pattern="[A-Za-zÀ-ÿ0-9]{1,32}" title="Le pseudo doit contenir uniquement des lettres ou des chiffres, entre 1 et 32 caractères." required><br><br>
+                
+                <h3>Choisissez votre difficulté de jeu :</h3>
+                <div class="difficulty-buttons">
+                    <button type="submit" name="difficulty" value="facile">Facile</button>
+                    <button type="submit" name="difficulty" value="moyen">Moyen</button>
+                    <button type="submit" name="difficulty" value="difficile">Difficile</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+{{ end }}
