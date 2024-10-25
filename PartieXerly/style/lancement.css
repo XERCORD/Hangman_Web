@@ -1,0 +1,138 @@
+/* Style de base pour le corps de la page */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9; /* Fond léger */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 80%;
+    max-width: 900px;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre subtile */
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #ff6b6b;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    color: #333;
+    font-size: 22px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 20px;
+    color: #ff0000;
+    line-height: 1.6;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+ul li {
+    background-color: #e1e1f3;
+    color: #333;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 1.4;
+    transition: background-color 0.3s;
+}
+
+ul li:hover {
+    background-color: #d4d4ed; /* Couleur au survol */
+}
+
+input[type="text"] {
+    width: 60%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #ff6b6b; /* Bordure colorée au focus */
+}
+
+.difficulty-buttons {
+    margin-top: 20px;
+}
+
+button {
+    background-color: #ff6b6b;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e64a4a;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 5px #ff6b6b; /* Effet de focus */
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    p, ul li {
+        font-size: 16px;
+    }
+
+    input[type="text"] {
+        width: 90%;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}

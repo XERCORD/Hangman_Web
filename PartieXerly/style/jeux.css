@@ -1,0 +1,160 @@
+.pendu-container {
+    position: relative;
+    width: 200px;
+    height: 250px;
+    margin: 0 auto;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 10px;
+}
+
+/* Dessin de la potence et du pendu, avec toutes les parties masquées par défaut */
+.base,
+.bar-vertical,
+.bar-horizontal,
+.corde,
+.tete,
+.corps,
+.bras-gauche,
+.bras-droit,
+.poignet,
+.doigt,
+.jambe-gauche,
+.jambe-droit {
+    display: none; /* Tout est masqué par défaut */
+    background-color: #333;
+    position: absolute;
+}
+
+/* Étapes du dessin du pendu */
+.base {
+    width: 100px;
+    height: 10px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bar-vertical {
+    width: 10px;
+    height: 210px;
+    bottom: 10px;
+    left: 25%;
+    transform: translateX(-50%);
+}
+
+.bar-horizontal {
+    width: 60px;
+    height: 10px;
+    top: 40px;
+    left: 38%;
+    transform: translateX(-50%);
+}
+
+.corde {
+    width: 10px;
+    height: 40px;
+    top: 40px;
+    left: 55%;
+    transform: translateX(-50%);
+}
+
+.tete {
+    width: 30px;
+    height: 30px;
+    top: 76px;
+    left: 46%;
+    border-radius: 50%;
+    border: 5px solid #333;
+    background-color: transparent;
+}
+
+.corps {
+    width: 8px;
+    height: 50px;
+    top: 112px;
+    left: 55%;
+    transform: translateX(-50%);
+    
+  
+    
+}
+
+.bras-gauche {
+    width: 45px;
+    height: 3px;
+    top: 125px;
+    left: 56%;
+    rotate:135deg;
+    transform-origin: left;
+}
+
+.bras-droit {
+    width: 45px;
+    height: 3px;
+    top: 125px;
+    left: 35%;
+    rotate: 135deg;
+    transform-origin: right;
+}
+.poignet {
+    width: 10px;
+    height: 10px;
+    top: 20px;
+    left: 68%;
+    border-radius: 50%;
+    border: 5px solid #333;
+    background-color: transparent;
+}
+
+.doigt {
+    width: 45px;
+    height: 3px;
+    top: 125px;
+    left: 35%;
+    rotate: 135deg;
+    transform-origin: right;
+}
+.jambe-gauche {
+    width: 45px;
+    height: 3px;
+    top: 200px;
+    left: 47%;
+    transform: rotate(290deg);
+    transform-origin: left;
+}
+
+.jambe-droit {
+    width: 45px;
+    height: 3px;
+    top: 200px;
+    left: 42.5%;
+    transform: rotate(-290deg);
+    transform-origin: right;
+}
+
+/* Styles des boutons */
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    background-color: #ff6b6b;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e64a4a;
+}
